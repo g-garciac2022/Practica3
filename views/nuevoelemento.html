@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es"> <!--Para poner el lenguaje en espaÃ±ol-->
+
+<head>
+    <title>NUEVO ELEMENTO</title>
+    <link type="text/css" rel="stylesheet" href="/css_nuevoelemento_grupoC.css.css"/> <!--G: Link al css corregido-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"> </script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+Collegiate+One&family=Fuggles&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="login-box">
+        <h2>Crear elemento</h2>
+        <form method="post" action="{{#if id}}/:id{{id}}{{else}}saveelemento{{/if id}}"   id="Formulario"> <!--G: Añadido el action para que se envíe a la ruta correcta, si tiene id, lo estamos editando, sino, lo estamos creando-->
+          {{#errors}}
+          <p class="iterar">{{msg}}</p>
+          {{/errors}}
+          <br>
+          <div class="user-box">
+            <input type="text" name="newNombre" id="newNombre" value="{{element.newNombre}}">
+            <label>Nombre</label>
+          </div>
+          <div class="user-box">
+            <input type="text" name="newDescripcion" id="newDescripcion" value="{{element.newDescripcion}}">
+            <label>Descripcion</label>
+          </div>
+          <div class="user-box">
+            <input type="number" name="newPrecio" id="newPrecio" value="{{element.newPrecio}}">
+            <label>Precio</label>
+          </div>
+          <div class="user-box">
+            <input type="text" name="newEfectosSecundarios" id="newEfectosSecundarios" value="{{element.newEfectosSecundarios}}">
+            <label>Efectos Secundarios</label>
+          </div>
+          <div class="user-box">
+            <input type="url" name="newImagen1" id="newImagen1" value="{{element.newImagen1}}">
+            <label>Imagen 1 del producto</label>
+          </div>
+          <div class="user-box">
+            <input type="url" name="newImagen2" id="newImagen2" value="{{element.newImagen2}}">
+            <label>Imagen 2 del producto</label>
+          </div>
+          <div class="user-box">
+            <input type="url" name="newImagen3" id="newImagen3" value="{{element.newImagen3}}">
+            <label>Imagen 3 del producto</label>
+          </div>
+          <div class="user-box">
+            <label>Ingredientes</label>
+          </div>
+          <br>
+          <br>
+          <div class="user-box">
+            <input type="checkbox" id="Leche" name="Leche" {{#element.Leche}}checked{{/element.Leche}}>
+            <label>Leche</label><br>
+          </div>
+          <div class="user-box">
+            <input type="checkbox" id="Cacao" name="Cacao" {{#element.Cacao}}checked{{/element.Cacao}}>
+            <label>Cacao</label><br>
+          </div>
+          <div class="user-box">
+            <input type="checkbox" id="Avellanas" name="Avellanas" {{#element.Avellanas}}checked{{/element.Avellanas}}> <!--G: Añadido el checkbox de avellanas, con esta sintaxis se cumprueba el booleano para que coincida al editar-->
+            <label>Avellanas</label>
+          </div>
+
+          <button type="submit" href="">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Guardar
+          </button>
+          <a href="/">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Cancelar
+          </a>
+        </form>
+      </div>       
+        
+</body>
+
+</html>

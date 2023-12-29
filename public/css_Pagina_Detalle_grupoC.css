@@ -1,0 +1,106 @@
+html {
+    background-color: orange;
+    margin: 5% 0 0 0;
+}
+body {
+    background-image: url('https://res.cloudinary.com/teepublic/image/private/s--5hHG_gX6--/t_Preview/b_rgb:5e366e,c_limit,f_jpg,h_630,q_90,w_630/v1483530754/production/designs/1028847_1.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+    padding: 3%;
+}
+.titulo {                            /*Diseño del título de la página*/
+    color:brown;
+    text-shadow: 2px 3px chocolate;
+    text-align: center;
+    background-color: greenyellow;
+    text-decoration: underline;
+    height: 70px;
+}
+div.container-fluid {           /*Diseño del container*/
+    margin: 5% 0% 0% 0%;    
+    color: greenyellow;
+    /*Todo el diseño de la imagen de fondo*/
+    
+}
+
+div.carousel-inner {            /*Diseño del carrusel de imágenes*/
+    border-radius: 7%;
+    border-color: lightblue green yellow red;   /*Colores del borde del carrusel*/
+    border-width: 20px;
+    border-style:ridge;         /*Borde doble con distinta textura*/
+    max-width: 80%;
+    margin: 5% 0% 0% 10%;
+}
+
+h2.fs-1 {                            /*Diseño de los títulos de las características del artículo*/
+    margin-top: 3%;
+    color:aquamarine;
+    font-style:italic;
+    text-decoration: underline;
+}
+
+p {
+    color:yellow;
+    background-image: var(--bs-gradient);   /*Añade un "cuadro" transparente alrededor del texto para que se vea mejor*/
+}
+
+.ingredientes_Articulo {        /*Lista de ingredientes*/
+    color: white;
+}
+
+.Lista_Magos {                          /*General. Pone todos los textos de la lista centrados*/
+    text-align:center;
+}
+
+.Lista_Magos .list-group-item:hover p{                   /*Hace que al pasar el ratón el texto desaparezca*/
+    opacity: 0;
+}
+
+.Lista_Magos .list-group-item:hover .Texto_Oculto .oculto {         /*Al pasar el ratón el texto secundario aparece*/
+    opacity: 1;
+}
+
+.Texto_Oculto .oculto{                     /*Relacionado a la transición para que se muestre el nuevo texto*/
+    transition:all 0.2 ease;
+    position: relative;
+    opacity: 0;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+
+.list-group-item p {                /*Color del texto de los textos de la lista*/
+    color:black;
+}
+.button_action
+{
+    padding: 5px;
+    margin: 10px 0px;
+    border: none;
+    border-radius: 0.3rem;
+    background-color: red;
+    color: white;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+button{
+    /* Este margen adicional representa aproximadamente el mismo espacio que el espacio
+       entre las etiquetas y sus campos de texto */
+    margin-left: .5em;
+    background-color: red;
+    color:white;
+}
+
+.Botones {              /*Estilo de los botones*/
+    list-style: none;
+    text-align:right;
+    margin-right: 5%;
+}
+
+#link{
+    color: white; /*Pongo el enlace en color blanco*/
+    text-decoration: none; /*Quito subrayado del enlace*/
+}

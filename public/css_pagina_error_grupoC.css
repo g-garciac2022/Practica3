@@ -1,0 +1,27 @@
+body {
+    margin:0; /*Margen*/
+    padding:0; /*Relleno*/
+    font-family: sans-serif; /*Tipo de letra*/
+    background-image: url('https://res.cloudinary.com/teepublic/image/private/s--5hHG_gX6--/t_Preview/b_rgb:5e366e,c_limit,f_jpg,h_630,q_90,w_630/v1483530754/production/designs/1028847_1.jpg'); /*Imagen del fondo*/
+    background-position: center center; /*Para dejar la imagen de fondo centrada, vertical y horizontalmente */
+    background-repeat: no-repeat; /*Evitar efecto mosaico en imagen*/
+    background-attachment: fixed; /*Para no deformar sus dimensiones*/
+    background-size: cover; /*Para cubrir toda la página*/
+  }
+  button {
+    /* Este margen adicional representa aproximadamente el mismo espacio que el espacio
+       entre las etiquetas y sus campos de texto */
+    margin-left: .5em;
+    background-color: red;
+    color:white;
+}
+.Botones {              /*Estilo de los botones*/
+    list-style: none;
+    text-align:right;
+    margin-right: 5%;
+}
+
+#link{
+    color: white; /*Pongo el enlace en color blanco*/
+    text-decoration: none; /*Quito subrayado del enlace*/
+}

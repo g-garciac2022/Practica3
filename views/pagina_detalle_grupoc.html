@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Rana de Chocolate</title>
+    <link type="text/css" rel="stylesheet" href="/css_pagina_detalle_grupoC.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"> </script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+Collegiate+One&family=Fuggles&display=swap" rel="stylesheet">               
+    <!--Todos los links para poder utilizar los estilos de bootstrap para el css-->
+</head>
+
+<body>
+    <div class="container-fluid"></div>
+        <div class="pagina">                <!--Div que engloba todo lo que lleva la página-->
+            <div class="row row-cols-2"> <!--Dividimos el container en 2 columnas-->
+                <div class="col-lg-6 col-sm-12"> <!--Posiciones de la primera columna dependiendo de las dimensiones de la pantalla-->
+                    <div class="row">           <!--Este div solamente es para que el título se ponga encima del carrusel-->
+                        <h1 class="titulo"><b>{{newNombre}}</b></h1>  <!--Título de arriba-->
+                    </div>
+                    <div id="Carrusel_de_imagenes" class="carousel carousel-dark slide" data-bs-touch="false"
+                        data-bs-interval="false">
+                        <div class="carousel-inner"> <!--Cada una de las imágenes del carrusel-->
+                            <div class="carousel-item active">      <!--La que está inicialmente activa-->
+                                <img class="d-block w-100"          
+                                    src="{{newImagen1}}"
+                                    alt="Imagen 1">   <!--Fijamos las dimensiones de cada imagen-->
+                            </div>                                      <!--en el carrusel, ponemos la imagen y el nombre en caso de que no cargue-->
+                            <div class="carousel-item">
+                                <img class="d-block w-100"
+                                    src="{{newImagen2}}"
+                                    alt="Imagen 2">
+                            </div>
+                            <div class="carousel-item">
+                                <img class="d-block w-100"
+                                    src="{{newImagen3}}"
+                                    alt="Imagen 3">
+                            </div>
+                        </div> <!--final de las imágenes del carrusel-->
+
+                        <div class="carousel-indicators">
+                            <!--indicadores de los botones para ir a cualquier imagen del carrusel-->
+                            <button type="button" data-bs-target="#Carrusel_de_imagenes" data-bs-slide-to="0"
+                                aria-current="true" class="active"></button>
+                            <!--Cada boton corresponde a cada una de las imágenes del carrusel "Carrusel_de_imagenes",
+                                indica el movimiento hacia qué imagen va. aria current es para que se vea más oscuro en el
+                                caso de que esté en la imagen que corresponda-->
+                            <button type="button" data-bs-target="#Carrusel_de_imagenes" data-bs-slide-to="1"></button>
+                            <button type="button" data-bs-target="#Carrusel_de_imagenes" data-bs-slide-to="2"></button>
+                        </div>
+
+                        <!--Botones de movimiento en el carrusel-->
+                        <button class="carousel-control-prev" type="button" data-bs-target="#Carrusel_de_imagenes"
+                            data-bs-slide="prev">   <!--Data slide indica el movimiento-->
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Anterior</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#Carrusel_de_imagenes"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Siguiente</span>
+                        </button>
+                    </div> <!--Final del carrusel-->
+                </div> <!--Final de la primera columna de la página-->
+
+                <div class="col-lg-6 col-sm-12"> <!--Información de la página, la cual empieza en la otra columna en pantalla completa-->
+                    <div class="container-fluid" alt="contenedor2">
+                        <div class="Contenido"> <!--Todo el texto-->
+                            <h2 class="fs-1"><b>Descripción</b></h2>    <!--Todos los h2 corresponden a los títulos-->
+                            <p class="Parrafo_descripción">
+                                {{newDescripcion}}
+                            </p>
+                            <h2 class="fs-1"><b>Ingredientes</b></h2>       <!--fs-1 es para poner el título en cursiva-->
+                            <ul class="ingredientes_Articulo"> <!--Lista de ingredientes del artículo-->
+                                {{#Leche}}<li>Leche</li>{{/Leche}}
+                                {{#Cacao}}<li>Cacao</li>{{/Cacao}}
+                                {{#Avellanas}}<li>Avellanas</li>{{/Avellanas}}
+                            </ul>
+                            <h2 class="fs-1"><b>Cromos</b></h2>
+                            <p>Estos son algunos de los magos/brujas del mundo mágico que pueden tocarte:</p>
+                            <div class="Lista_Magos">           <!--Toda la lista de magos-->
+                                <ul class="list-group">
+                                    {{#magos}}
+                                    <div>   <!--Todos los elementos de la lista están dentro de un div por el texto oculto-->
+                                        <li class="list-group-item list-group-item-action list-group-item-success" action="mostrarMagos">
+                                            <!--Tipo de cada elemento de la lista (según la casa a la que pertenecen
+                                                o su color significativo [Dumbledore])-->
+                                            <p class="Texto_Principal"><b>{{newNombreMago}}</b></p>
+                                            <div class="Texto_Oculto">
+                                                <p class="oculto">{{newDescripcionMago}}</p>
+                                            </div>
+                                        </li>
+                                    </div>
+                                    {{/magos}}
+                                </ul>
+                            </div>
+                            <br>
+                            <form method="post" action="/pagina_detalle_grupoc/{{id}}/GuardarMago">
+                                <label for="name" class="bg-dark text-light">Añadir un nuevo mago:</label>
+                                <br>
+                                <input type="text" id="Nombre_mago_nuevo" placeholder="Mago Nuevo" name="newNombreMago">
+                                <br>
+                                <br>
+                                <label for="name" class="bg-dark text-light">Añadir descripción</label>
+                                <br>
+                                <textarea type="text" id="Descripción_nuevo_mago" placeholder="Descripción del mago" name="newDescripcionMago"></textarea>
+                                <br>
+                                <br>
+                                <button type="submit">Guardar mago</button>
+                            </form>
+                            <h2 class="fs-1"><b>Efectos secundarios</b></h2>
+                            <p id="Efectos_secundarios">{{newEfectosSecundarios}}</p>
+                            <br>
+                            <h2 class="fs-1"><b>Precio = {{newPrecio}} $</b></h2>
+                        </div>
+                    </div>
+                    <div>
+                        <ul class="Botones">        <!--Botones de borrar, editar y volver a página principal-->
+                            <li class="button">
+                                    <a href="./{{id}}/delete" class="btn btn-danger text-decoration-none rounded p-2 my-1">
+                                        <i class="fa fa-trash"></i>
+                                        <span>Borrar</span>
+                                    </a>
+                            </li>
+                            <li class="button">
+                                <a href="./{{id}}/editar" class="btn btn-danger text-decoration-none rounded p-2 my-1">
+                                    <i class="fa fa-pencil"></i>
+                                    <span>Editar</span>
+                                </a>
+                            </li>
+                            <li class="button">
+                                <button type="menu">
+                                    <a id="link" href="../" class="fa fa-eye">Ver todos los elementos</a>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
