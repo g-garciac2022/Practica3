@@ -2,85 +2,132 @@
 <html lang="es"> <!--Para poner el lenguaje en espaÃ±ol-->
 
 <head>
-    <title>NUEVO ELEMENTO</title>
-    <link type="text/css" rel="stylesheet" href="/css_nuevoelemento_grupoC.css.css"/> <!--G: Link al css corregido-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"> </script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+Collegiate+One&family=Fuggles&display=swap" rel="stylesheet">
+  <title>NUEVO ELEMENTO</title>
+  <link type="text/css" rel="stylesheet" href="/css_nuevoelemento_grupoC.css.css" /> <!--G: Link al css corregido-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"> </script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+Collegiate+One&family=Fuggles&display=swap"
+    rel="stylesheet">
 </head>
 
 <body>
-    <div class="login-box">
-        <h2>Crear elemento</h2>
-        <form method="post" action="{{#if id}}/:id{{id}}{{else}}saveelemento{{/if id}}"   id="Formulario"> <!--G: Añadido el action para que se envíe a la ruta correcta, si tiene id, lo estamos editando, sino, lo estamos creando-->
-          {{#errors}}
-          <p class="iterar">{{msg}}</p>
-          {{/errors}}
-          <br>
-          <div class="user-box">
-            <input type="text" name="newNombre" id="newNombre" value="{{element.newNombre}}">
-            <label>Nombre</label>
-          </div>
-          <div class="user-box">
-            <input type="text" name="newDescripcion" id="newDescripcion" value="{{element.newDescripcion}}">
-            <label>Descripcion</label>
-          </div>
-          <div class="user-box">
-            <input type="number" name="newPrecio" id="newPrecio" value="{{element.newPrecio}}">
-            <label>Precio</label>
-          </div>
-          <div class="user-box">
-            <input type="text" name="newEfectosSecundarios" id="newEfectosSecundarios" value="{{element.newEfectosSecundarios}}">
-            <label>Efectos Secundarios</label>
-          </div>
-          <div class="user-box">
-            <input type="url" name="newImagen1" id="newImagen1" value="{{element.newImagen1}}">
-            <label>Imagen 1 del producto</label>
-          </div>
-          <div class="user-box">
-            <input type="url" name="newImagen2" id="newImagen2" value="{{element.newImagen2}}">
-            <label>Imagen 2 del producto</label>
-          </div>
-          <div class="user-box">
-            <input type="url" name="newImagen3" id="newImagen3" value="{{element.newImagen3}}">
-            <label>Imagen 3 del producto</label>
-          </div>
-          <div class="user-box">
-            <label>Ingredientes</label>
-          </div>
-          <br>
-          <br>
-          <div class="user-box">
-            <input type="checkbox" id="Leche" name="Leche" {{#element.Leche}}checked{{/element.Leche}}>
-            <label>Leche</label><br>
-          </div>
-          <div class="user-box">
-            <input type="checkbox" id="Cacao" name="Cacao" {{#element.Cacao}}checked{{/element.Cacao}}>
-            <label>Cacao</label><br>
-          </div>
-          <div class="user-box">
-            <input type="checkbox" id="Avellanas" name="Avellanas" {{#element.Avellanas}}checked{{/element.Avellanas}}> <!--G: Añadido el checkbox de avellanas, con esta sintaxis se cumprueba el booleano para que coincida al editar-->
-            <label>Avellanas</label>
-          </div>
+  <div class="login-box">
+    <h2>Crear elemento</h2>
+    <form method="post" action="{{#if id}}/:id{{id}}{{else}}saveelemento{{/if id}}" id="Formulario">
+      <!--G: Añadido el action para que se envíe a la ruta correcta, si tiene id, lo estamos editando, sino, lo estamos creando-->
+      {{#errors}}
+      <p class="iterar">{{msg}}</p>
+      {{/errors}}
+      <br>
+      <div class="user-box">
+        <input type="text" name="newNombre" id="newNombre" value="{{element.newNombre}}" pattern="[A-Z].*" required>
 
-          <button type="submit" href="">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            Guardar
-          </button>
-          <a href="/">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            Cancelar
-          </a>
-        </form>
-      </div>       
-        
+        <label>Nombre</label>
+      </div>
+      <div class="user-box">
+        <input type="text" name="newDescripcion" id="newDescripcion" value="{{element.newDescripcion}}" required
+          minlength="50" maxlength="500">
+        <label>Descripcion</label>
+      </div>
+      <div class="user-box">
+        <input type="number" name="newPrecio" id="newPrecio" value="{{element.newPrecio}}" min="0" step="0.01" required>
+        <label>Precio</label>
+      </div>
+      <div class="user-box">
+        <input type="text" name="newEfectosSecundarios" id="newEfectosSecundarios"
+          value="{{element.newEfectosSecundarios}}">
+        <label>Efectos Secundarios</label>
+      </div>
+      <div class="user-box">
+        <input type="url" name="newImagen1" id="newImagen1" value="{{element.newImagen1}}" required>
+        <label>Imagen 1 del producto</label>
+      </div>
+      <div class="user-box">
+        <input type="url" name="newImagen2" id="newImagen2" value="{{element.newImagen2}}" required>
+        <label>Imagen 2 del producto</label>
+      </div>
+      <div class="user-box">
+        <input type="url" name="newImagen3" id="newImagen3" value="{{element.newImagen3}}" required>
+        <label>Imagen 3 del producto</label>
+      </div>
+      <div class="user-box">
+        <label>Ingredientes</label>
+      </div>
+      <br>
+      <br>
+      <div class="user-box">
+        <input type="checkbox" id="Leche" name="Leche" {{#element.Leche}}checked{{/element.Leche}}>
+        <label>Leche</label><br>
+      </div>
+      <div class="user-box">
+        <input type="checkbox" id="Cacao" name="Cacao" {{#element.Cacao}}checked{{/element.Cacao}}>
+        <label>Cacao</label><br>
+      </div>
+      <div class="user-box">
+        <input type="checkbox" id="Avellanas" name="Avellanas" {{#element.Avellanas}}checked{{/element.Avellanas}}>
+        <!--G: Añadido el checkbox de avellanas, con esta sintaxis se cumprueba el booleano para que coincida al editar-->
+        <label>Avellanas</label>
+      </div>
+
+      <button type="submit" href="">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Guardar
+      </button>
+      <a href="/">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Cancelar
+      </a>
+    </form>
+  </div>
+  <script> //G: Script para validar el formulario
+
+    const inputs = document.querySelectorAll('input'); //G: Recogemos todos los inputs del formulario
+
+    inputs.forEach(input => { //G: Iteramos sobre todos los inputs
+      const errorElement = document.createElement('div'); //G: Creamos un div para mostrar el error
+      errorElement.style.color = 'red'; //G: Le damos estilo al div
+      input.parentNode.appendChild(errorElement); //G: Lo añadimos al padre del input para que se muestre debajo.
+
+      function customValidation() { //G: Función para validar el input
+        if (!this.validity.valid) { //G: Si no es válido
+          if (this.validity.valueMissing) { //G: Si no tiene valor
+            errorElement.textContent = 'Este campo es obligatorio'; 
+          } else if (this.validity.patternMismatch) { //G: Si no coincide con el patrón (en este caso, que NOMBRE   empiece por mayúscula)
+            errorElement.textContent = 'El nombre debe empezar por mayúscula';
+          } else if (this.validity.stepMismatch) { //G: Si no coincide con el step (en este caso, que PRECIO tenga dos decimales)
+            errorElement.textContent = 'Solo se admiten dos decimales';
+          }
+          else if (this.validity.tooShort) { //G: Si DESCRIPCION es demasiado corto
+            errorElement.textContent = 'El valor debe tener al menos ' + this.minLength + ' caracteres; ha introducido ' + this.value.length;
+          } else if (this.validity.tooLong) { //G: Si DESCRIPCION es demasiado largo
+            errorElement.textContent = 'El valor debe tener menos de ' + this.maxLength + ' caracteres; ha introducido ' + this.value.length;
+          } else if (this.validity.rangeUnderflow) { //G: Si PRECIO es menor que el mínimo (0)
+            errorElement.textContent = 'Introduce un valor positivo'; //G: Añadido el mensaje de error para el rango
+          } else if (this.validity.typeMismatch) { //G: Si no coincide con el tipo (en este caso, que IMAGEN sea una URL)
+            if (this.name === 'newImagen1' || this.name === 'newImagen2' || this.name === 'newImagen3') {
+              errorElement.textContent = 'Introduce una URL válida';
+            } else {  //G: Para otros casos (no creo que haya pero por si acaso)
+              errorElement.textContent = 'Introduce un valor válido';
+            }
+          }
+        }
+        else {
+          errorElement.textContent = ''; //G: Si es válido, no mostramos nada
+        }
+      }
+
+      input.addEventListener('input', customValidation); //G: Añadimos el evento input para que se ejecute la función cada vez que se escriba algo
+      input.addEventListener('focusout', customValidation); //G: Añadimos el evento focusout para que se ejecute la función cada vez que se salga del input
+    });
+
+  </script> <!--G: Debe colocarse antes de temrinar el body, para que pueda analizar los valores de este -->
 </body>
 
 </html>

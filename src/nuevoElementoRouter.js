@@ -57,9 +57,10 @@ router.post('/nuevoelemento',
     [ check('newNombre').notEmpty().withMessage('Por favor, introduce un nombre válido.'),
     check('newDescripcion').notEmpty().withMessage('Por favor, introduce una descripción.'),
     check('newPrecio').notEmpty().withMessage('Por favor, introduce un precio válido.'),
-    check('newEfectosSecundarios').notEmpty().withMessage('Por favor, introduce un efecto secundario.'),
+    // G: He eliminado el campo de efectos secundarios para tener un valor que no sea obligatorio
     check('newImagen1').notEmpty().withMessage('Por favor, introduce una imagen válida.'),
-], (req, res) => {
+],
+ (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         // Aquí puedes manejar los errores como quieras
