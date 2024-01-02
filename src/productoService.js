@@ -48,7 +48,20 @@ const magos =[
 
 const elements = [];
 
+export function buscarProductos(terminoBusqueda) {
 
+    let resultados = [];
+    console.log(terminoBusqueda);
+
+    for (let producto of elements.values()) {
+        if (producto.nombre.toLowerCase().includes(terminoBusqueda.toLowerCase())) {
+            resultados.push(producto);
+        }
+    }
+    console.log(resultados);
+
+    return resultados;
+}
 
 
 
@@ -186,8 +199,7 @@ export function loadSampleData() {
     newElement({ id:6, newNombre: 'Brebaje Inteligente', newDescripcion: '¿Cansado de que no te entren los conceptos por mucho que estudies? Esta poción es para ti. Provoca una capacidad de concentración grande para ayudarte a repasarte esos temas que te cuestan. ¡Aprueba esa asignatura que te cuesta!', newPrecio: '50.00', newEfectosSecundarios: '!NO CONSUMIR CADUCADO BAJO NINGÚN CONCEPTO¡ Esto provocaría el efecto inverso y no conseguirías ni ponerte a estudiar siquiera.', newImagen1: 'https://img.freepik.com/fotos-premium/pocao-do-amor-nos-estilos-fantasia-e-steampunk_948265-4032.jpg', newImagen2: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXhQq67Xf6ZE8H-BfAqRFH3Gu2dpRfPAfFRgxkeT63a_M67Z5Yvi-sFowAYxqrHgOLOx8&usqp=CAU', newImagen3: 'https://i.etsystatic.com/14113194/r/il/77a7ed/3542620371/il_570xN.3542620371_hgj2.jpg', Leche: true, Cacao: true, Avellanas: true, magos: magos, });
     newElement({ id:7, newNombre: 'Caramelos de la verdad', newDescripcion: 'Piensas que alguien te miente? Dale esto y descubre todo lo que te oculta. Caramelos fabricados con la poción "Veritaserum".', newPrecio: '13.45', newEfectosSecundarios: 'Si está caducado no tiene ningún efecto, simplemente pasa a ser un caramelo normal.', newImagen1: 'https://i.pinimg.com/736x/be/cf/ec/becfeceffc4ec643bd8c0f21891bdc0a.jpg', newImagen2: 'https://media.istockphoto.com/id/525106711/es/foto/sweet-rojo-y-blanco-caramelo-de-menta.jpg?s=612x612&w=0&k=20&c=qWLVIcYcD8TWYgNLgy-ahDYzHVPj0Wtl6t5YabhOwtg=', newImagen3: 'https://c8.alamy.com/compes/eagp25/dulce-rojo-y-blanco-en-un-tazon-de-caramelos-de-menta-eagp25.jpg', Leche: true, Cacao: true, Avellanas: true, magos: magos, });
     newElement({ id:8, newNombre: 'Amortentia', newDescripcion: 'Filtro de amor. Provoca una fuerte atracción del individuo que lo consume hacia la primera persona que ve. Esto solo dura un tiempo.', newPrecio: '69.00', newEfectosSecundarios: 'Aparte de estar engañando a alguien para que le gustes no tiene ninguno.', newImagen1: 'https://i.etsystatic.com/42305365/r/il/6ebba9/4805678214/il_570xN.4805678214_2tfa.jpg', newImagen2: 'https://i.etsystatic.com/19816601/r/il/9eb943/1900491209/il_fullxfull.1900491209_i7nc.jpg', newImagen3: 'https://www.koekoe.es/7159-tm_thickbox_default/pocion-amortentia-bote-gominolas-100-gr.jpg', Leche: true, Cacao: true, Avellanas: true, magos: magos, });
-    newElement({ id:9, newNombre: 'Rolax', newDescripcion: 'Filtro de amor. Provoca una fuerte atracción del individuo que lo consume hacia la primera persona que ve. Esto solo dura un tiempo.', newPrecio: '69.00', newEfectosSecundarios: 'Aparte de estar engañando a alguien para que le gustes no tiene ninguno.', newImagen1: 'https://i.etsystatic.com/42305365/r/il/6ebba9/4805678214/il_570xN.4805678214_2tfa.jpg', newImagen2: 'https://i.etsystatic.com/19816601/r/il/9eb943/1900491209/il_fullxfull.1900491209_i7nc.jpg', newImagen3: 'https://www.koekoe.es/7159-tm_thickbox_default/pocion-amortentia-bote-gominolas-100-gr.jpg', Leche: true, Cacao: true, Avellanas: true, magos: magos, }); //G. He añadido este elemento para probar con elementos no multiplos de 4
-
+    
 }
 
 loadSampleData();

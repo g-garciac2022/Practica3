@@ -30,20 +30,12 @@ router.get('/nuevoElemento', (req, res) => {
     res.render('nuevoElemento');
 });
 
-let existingUsernames = [];
+router.get('/selectproductos',(req,res) => {
+    let terminoBusqueda = req.query.termino || '';
 
-router.get('/availableElementName', (req, res) => {
-
-    let username = req.query.username;
-
-    let availableElementName = existingUsernames.indexOf(username) === -1;
-
-    let response = {
-        available: availableElementName
-    }
-
-    res.json(response);
+    res.render('producto',{producto:productos.buscarProductos(terminoBusqueda)})
 });
+
 
 router.get('/:id', (req, res) => {
     const id = req.params.id;
