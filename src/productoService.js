@@ -50,17 +50,17 @@ const elements = [];
 
 export function buscarProductos(terminoBusqueda) {
 
-    let resultados = [];
+    let elements = [];
     console.log(terminoBusqueda);
 
-    for (let producto of elements.values()) {
-        if (producto.nombre.toLowerCase().includes(terminoBusqueda.toLowerCase())) {
-            resultados.push(producto);
+    for (let elemento of elements.values()) {
+        if (elemento.nombre.toLowerCase().includes(terminoBusqueda.toLowerCase())) {
+            elements.push(elemento);
         }
     }
-    console.log(resultados);
+    console.log(elements);
 
-    return resultados;
+    return elements;
 }
 
 

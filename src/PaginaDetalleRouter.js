@@ -24,8 +24,9 @@ router.get('/elementos', (req, res) => {
 
 router.get('/selectproductos',(req,res) => {
     let terminoBusqueda = req.query.termino || '';
+    console.log(terminoBusqueda);
 
-    res.render('producto',{producto:productos.buscarProductos(terminoBusqueda)})
+    res.render('elemento',{elemento:elements.buscarProductos(terminoBusqueda)})
 });
 
 

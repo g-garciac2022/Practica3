@@ -14,7 +14,7 @@ async function loadMore(){
     loadMoreRequests++;
 }
 
-async function searchProductos(event){
+async function buscarProductos(event){
 
     event.preventDefault();
     
@@ -22,11 +22,11 @@ async function searchProductos(event){
 
     const response = await fetch(`/selectproductos?termino=${encodeURIComponent(terminoBusqueda)}`);
 
-    const producto = await response.text();
+    const elemento = await response.text();
   
-    const content = document.getElementById("producto");
+    const content = document.getElementById("elemento");
 
-    content.innerHTML = producto;
+    content.innerHTML = elemento;
 
 }
 
