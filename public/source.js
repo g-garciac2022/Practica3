@@ -29,3 +29,26 @@ async function searchProductos(event){
     content.innerHTML = producto;
 
 }
+
+
+//--------------Carrito---------------
+document.getElementById('cart-button').addEventListener('click', function(event) {
+    const cartContainer = document.querySelector('.container-cart-products');
+    cartContainer.classList.remove('hidden');
+    event.stopPropagation(); //evita repetir el evento (que el mismo click active y desactive el contenedor)
+});
+
+document.addEventListener('click', function(event) {
+    const cartContainer = document.querySelector('.container-cart-products');
+    const cartButton = document.getElementById('cart-button');
+
+    // Verificar si se hizo clic fuera del contenedor del carrito y del botón del carrito
+    if (!cartContainer.contains(event.target) && event.target !== cartButton) {
+        // 
+        cartContainer.classList.add('hidden');
+    }
+});
+
+
+
+
