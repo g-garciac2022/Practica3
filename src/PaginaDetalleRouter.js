@@ -5,6 +5,49 @@ import { getAllElements } from './productoService.js';
 
 const router = express.Router();
 
+
+router.use(express.json()); //G necesario para enviar JSON
+
+
+let cart = [];
+
+router.post('/add-to-cart/:id', (req, res) => {
+    // Get the product ID from the request parameters
+    const productId = req.params.id;
+
+    // Find the product in your data storage
+    // This is just an example, you would need to replace this with your actual code to find the product
+    const product = productoService.getElementByID(productId);
+
+    // Add the product to the cart
+    cart.push(product);
+    console.log(cart);
+
+    // Send the cart as a JSON response
+    res.json(cart);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 router.use('/public', express.static('public'));
 
 router.get('/', (req, res) => {
