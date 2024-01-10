@@ -30,11 +30,11 @@ async function buscarProductos(event) {
 
     const response = await fetch(`/selectproductos?termino=${encodeURIComponent(terminoBusqueda)}`);
 
-    const elemento = await response.text();
+    const elementos = await response.text();
 
-    const content = document.getElementById("elemento");
+    const content = document.getElementById("elementos");
 
-    content.innerHTML = elemento;
+    content.innerHTML = elementos;
 
 }
 

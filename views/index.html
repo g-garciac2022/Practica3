@@ -19,7 +19,10 @@
    
     <div id="father">
         <h1 class="titulo">SORTILEGIOS PELIRROJOS
-            <input placeholder="Filtrar" id= "buscador" action = "selectproductos">
+            <form class="d-flex" role="search" onsubmit="buscarProductos(event)">
+                <input class="form-control" id="buscador" type="search" placeholder="¿Que tienes en mente...?" aria-label="Search">
+            <!----    <button class="btn btn-outline-success" type="submit" >Search</button> -->
+            </form>
     </h1>
 
         <!-- Carrito -->

@@ -48,19 +48,16 @@ const magos =[
 
 const elements = [];
 
-export function buscarProductos(terminoBusqueda) {
+export function buscar(terminoBusqueda) {
 
-    let elements = [];
-    console.log(terminoBusqueda);
+    let elementos = [];
+    console.log("terminoBusqueda");
 
-    for (let elemento of elements.values()) {
-        if (elemento.nombre.toLowerCase().includes(terminoBusqueda.toLowerCase())) {
-            elements.push(elemento);
-        }
-    }
-    console.log(elements);
+    elementos = elements.filter((elem) => elem.newNombre.toLowerCase().includes(terminoBusqueda.toLowerCase()));
+    
+    console.log(elementos);
 
-    return elements;
+    return elementos;
 }
 
 

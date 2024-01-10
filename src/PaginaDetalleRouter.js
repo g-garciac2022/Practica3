@@ -2,6 +2,7 @@ import express from 'express';
 import * as productoService from './productoService.js';
 import {mostrarMagos} from "./productoService.js";
 import { getAllElements } from './productoService.js';
+import * as elementos from './productoService.js';
 
 const router = express.Router();
 
@@ -54,7 +55,7 @@ router.get('/selectproductos',(req,res) => {
     let terminoBusqueda = req.query.termino || '';
     console.log(terminoBusqueda);
 
-    res.render('elemento',{elemento:elements.buscarProductos(terminoBusqueda)})
+    res.render('elementos',{elemento:elementos.buscar(terminoBusqueda)})
 });
 
 

@@ -2,6 +2,7 @@ import express from 'express';
 import * as productoService from './productoService.js';
 import { check, validationResult } from 'express-validator';
 import { getAllElements } from './productoService.js';
+import * as elementos from './productoService.js';
 
 
 const router = express.Router();
@@ -66,8 +67,9 @@ router.get('/nuevoElemento', (req, res) => {
 
 router.get('/selectproductos',(req,res) => {
     let terminoBusqueda = req.query.termino || '';
+    console.log(terminoBusqueda);
 
-    res.render('producto',{producto:productos.buscarProductos(terminoBusqueda)})
+    res.render('elementos',{elemento:elementos.buscar(terminoBusqueda)})
 });
 
 
