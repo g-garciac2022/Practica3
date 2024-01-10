@@ -1,3 +1,10 @@
+
+
+    
+
+
+
+
 const NUM_RESULTS = 4;
 
 let loadMoreRequests = 0;
@@ -42,9 +49,16 @@ document.getElementById('cart-button').addEventListener('click', function (event
 document.addEventListener('click', function (event) {
     const cartContainer = document.querySelector('.container-cart-products');
     const cartButton = document.getElementById('cart-button');
+    const loadMoreButton = document.getElementById('loadMore');
+    const addButton = document.querySelectorAll('.add-to-cart-button'); // NodeLIst, debemos pasar a Array
+    console.log(addButton);
+    const isAddButton = Array.from(addButton).some(button => button.contains(event.target));
 
+    //Array = pasar a array desde addButton
+    //some = alguno de los elementos del array cumple la condición
+    console.log(isAddButton);
     // Verificar si se hizo clic fuera del contenedor del carrito y del botón del carrito
-    if (!cartContainer.contains(event.target) && event.target !== cartButton) {
+    if (!isAddButton  &&  !cartContainer.contains(event.target) && event.target !== cartButton && event.target !== loadMoreButton ) {
         // 
         cartContainer.classList.add('hidden');
     }
@@ -66,40 +80,40 @@ document.addEventListener('click', function (event) {
 //         });
 // });
 
+let carrito = [];
+document.addEventListener('DOMContentLoaded', async () => {
+    
+   
+    async function loadCart() {
+        const response = await fetch('/get-cart', { method: 'GET' });
+        carrito = await response.json();
+        console.log(carrito.length);
+    
+        // Log the cart items
+        for (let oldProduct of carrito) {
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Variables
-    // const baseDeDatos = [
-    //     {
-    //         id: 1,
-    //         nombre: 'vertex',
-    //         precio: 200,
-    //         imagen: 'vertex03.jpg'
-    //     },
-    //     {
-    //         id: 2,
-    //         nombre: 'babolat',
-    //         precio: 150,
-    //         imagen: 'babolat.jpg'
-    //     },
-    //     {
-    //         id: 3,
-    //         nombre: 'hack02',
-    //         precio: 200,
-    //         imagen: 'hack.jpg'
-    //     },
-    // ];
+            const renamedProduct = {
+                nombre: oldProduct.newNombre,
+                precio: oldProduct.newPrecio,
+                image1: oldProduct.newImagen1,
+                quantity: oldProduct.quantity  // Assuming quantity is also part of your data
+            };
 
-    let carrito = [];
-    const divisa = '€';
-    const DOMelementos = document.querySelector('#elementos');
-    const DOMcarrito = document.querySelector('#carrito');
-    const DOMtotal = document.querySelector('#total');
-    const DOMbotonVaciar = document.querySelector('#boton-vaciar');
-    console.log(DOMbotonVaciar);
-    console.log(DOMelementos);
-    console.log(DOMcarrito);
-    console.log(DOMtotal);
+            
+
+            carrito[carrito.indexOf(oldProduct)] = renamedProduct;
+
+            console.log(renamedProduct);
+
+        }
+    
+        // Render the cart
+        renderizarCarrito();
+    }
+
+    window.onload = loadCart;
+    
+    
 
     const miNodo = document.getElementById('father');
 
@@ -118,18 +132,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then(response => response.json()) // Convert the response data to JSON
                 .then(cart => {
                     console.log(cart.length);
+                    
                     const product = cart[cart.length - 1];
 
                     // Create a new product object with the data from the response
                     const Product = {
                         nombre: product.newNombre,
                         precio: product.newPrecio,
-                        image1: product.newImage1
+                        image1: product.newImagen1
                     };
 
                     console.log(product.newNombre);
                     console.log(product.newPrecio);
-                    console.log(product.newImage1);
+                    console.log(product.newImagen1);
 
                     // Check if the product is already in the cart
                     const existingProduct = carrito.find(item => item.nombre === Product.nombre);
@@ -137,140 +152,142 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (existingProduct) {
                         // If the product is already in the cart, increase its quantity
                         existingProduct.quantity++;
-                        
+
                     } else {
                         // If the product is not in the cart, add it
                         Product.quantity = 1;
-                        carrito.push(Product); 
+                        carrito.push(Product);
                         console.log('added')// Add the product to the cart
                     }
 
                     console.log(carrito);
                     renderizarCarrito();
                 });
-                
-            
+
+
 
 
         }
     });
 
+    const botonVaciar = document.querySelector('#boton-vaciar');
 
-    // Funciones
+    // Add a click event listener to the button
+    botonVaciar.addEventListener('click', () => {
+        // Empty the cart
+        carrito = [];
 
-    /**
-    * Dibuja todos los productos a partir de la base de datos. No confundir con el carrito
-    */
-    // function renderizarProductos() {
-    //     baseDeDatos.forEach((info) => {
-    //         // // Estructura
-    //         // const miNodo = document.createElement('div');
-    //         // miNodo.classList.add('card', 'col-sm-4');
-    //         // // Body
-    //         // const miNodoCardBody = document.createElement('div');
-    //         // miNodoCardBody.classList.add('card-body');
-    //         // // Titulo
-    //         // const miNodoTitle = document.createElement('h5');
-    //         // miNodoTitle.classList.add('card-title');
-    //         // miNodoTitle.textContent = info.nombre;
-    //         // // Imagen
-    //         // const miNodoImagen = document.createElement('img');
-    //         // miNodoImagen.classList.add('img-fluid');
-    //         // miNodoImagen.setAttribute('src', info.imagen);
-    //         // // Precio
-    //         // const miNodoPrecio = document.createElement('p');
-    //         // miNodoPrecio.classList.add('card-text');
-    //         // miNodoPrecio.textContent = `${info.precio}${divisa}`;
-    //         // // Boton 
-    //         // const miNodoBoton = document.createElement('button');
-    //         // miNodoBoton.classList.add('btn', 'btn-primary');
-    //         // miNodoBoton.textContent = '+';
-    //         // miNodoBoton.setAttribute('marcador', info.id);
-
-    //         const miNodoBoton = document.getElementById('add-to-cart-button');
+        // Optionally, you can also update the cart display after emptying the cart
+        renderizarCarrito();
+    });
 
 
-    //         miNodoBoton.addEventListener('click', anyadirProductoAlCarrito);
-    //         // Insertamos
-    //         miNodoBody.appendChild(miNodoImagen);
-    //         miNodoBody.appendChild(miNodoTitle);
-    //         miNodoBody.appendChild(miNodoPrecio);
-    //         miNodoBody.appendChild(miNodoBoton);
-    //         miNodo.appendChild(miNodoBody);
-    //         DOMelementos.appendChild(miNodo);
-    //     });
-    // }
-
-    /**
-    * Evento para añadir un producto al carrito de la compra
-    */
-    // function anyadirProductoAlCarrito(products) {
-    //     products.forEach(product => {
-    //         // Log the product details
-    //         console.log(product.nombre);
-    //         console.log(product.precio);
-    //         console.log(product.image1);
-
-    //         // Add the product to our cart
-    //         carrito.push(product);
-    //     });
-
-
-    // }
-
-    /**
-    * Dibuja todos los productos guardados en el carrito
-    */
-
-
-    function renderizarCarrito() {
-        // Get the cart items container
-        const cartItemsContainer = document.querySelector('#shop');
-        
-        // Clear the cart items container
-        cartItemsContainer.innerHTML = '';
-        console.log(carrito.length);
-        // Check if there are items in the cart
-        if (carrito.length > 0) {
-
-            // Loop through the items in the cart
-            for (let i = 0; i < carrito.length; i++) {
-                // Create a new div element for the product
-                const productDiv = document.createElement('div');
-                productDiv.classList.add('product');
-
-                // Create and append the product image
-                const productImage = document.createElement('img');
-                productImage.src = carrito[i].image1;
-                productImage.alt = carrito[i].nombre;
-                productDiv.appendChild(productImage);
-
-                 // Create and append the product quantity
-                 const productQuantity = document.createElement('p');
-                 productQuantity.textContent = carrito[i].quantity;
-                 productDiv.appendChild(productQuantity);
-
-                // Create and append the product name
-                const productName = document.createElement('p');
-                productName.textContent = carrito[i].nombre;
-                productDiv.appendChild(productName);
-
-                // Create and append the product price
-                const productPrice = document.createElement('p');
-                productPrice.textContent = carrito[i].precio + '€';
-                productDiv.appendChild(productPrice);
-
-                // Append the product div to the cart items container
-                cartItemsContainer.appendChild(productDiv);
-            }
-        } else {
-            // If there are no items in the cart, display a message
-            cartItemsContainer.textContent = 'No hay productos en el carrito';
-        }
-    }
-
+    
+    
 }
 );
+function renderizarCarrito() {
+    // Get the cart items container
+    const cartItemsContainer = document.querySelector('#shop');
+    cartItemsContainer.classList.add('flex-container');
+    // Clear the cart items container
+    cartItemsContainer.innerHTML = '';
+    console.log(carrito.length);
+
+    
+    // Check if there are items in the cart
+    if (carrito.length > 0) {
+
+
+
+        // Loop through the items in the cart
+        for (let i = 0; i < carrito.length; i++) {
+
+            console.log(carrito[i].quantity);
+            const existingProduct = carrito.find(item => item.nombre === carrito[i].nombre);
+            
+            if (existingProduct && existingProduct !== carrito[i]) {
+                // If the product is already in the cart, increase its quantity
+                existingProduct.quantity++;
+                continue;
+            }
+            
+            // Create a new div element for the product
+            const productDiv = document.createElement('div');
+            productDiv.classList.add('product', 'flex-item');
+
+
+        
+
+            // Create and append the product image
+            const productImage = document.createElement('img');
+            productImage.src = carrito[i].image1;
+            productImage.alt = carrito[i].nombre;
+            productImage.classList.add('align-left');
+            productImage.width = 70; // Set the width of the image
+            productImage.height = 70; // Set the height of the image
+            // productImage.classList.add('your-class-name'); // Add a class to the image
+            productDiv.appendChild(productImage);
+
+            // Create and append the product quantity
+            const productQuantity = document.createElement('p');
+            productQuantity.textContent = carrito[i].quantity;
+            productQuantity.classList.add('margin-right');
+            productDiv.appendChild(productQuantity);
+
+            // Create and append the product name
+            const productName = document.createElement('p');
+            productName.textContent = carrito[i].nombre;
+            productName.classList.add('margin-right');
+
+            productDiv.appendChild(productName);
+
+            // Create and append the product price
+            const productPrice = document.createElement('p');
+            const totalPrice = (carrito[i].precio * carrito[i].quantity).toFixed(2); // Format the price to use 2 decimal places
+            productPrice.textContent = totalPrice + '€';
+            productPrice.classList.add('margin-right');
+
+            productDiv.appendChild(productPrice);
+
+            const productElement = document.createElement('div');
+        productElement.innerHTML = `
+            <button onclick="decreaseQuantity('${carrito[i].nombre}')">-</button>
+        `;
+        productDiv.appendChild(productElement);
+
+
+            
+
+            // Append the product div to the cart items container
+            cartItemsContainer.appendChild(productDiv);
+        }
+        const total = carrito.reduce((acc, item) => acc + item.precio * item.quantity, 0).toFixed(2);
+        const totalDiv = document.createElement('div');
+        totalDiv.textContent = 'Total: ' + total + '€';
+        cartItemsContainer.appendChild(totalDiv);
+    } else {
+        // If there are no items in the cart, display a message
+        cartItemsContainer.textContent = 'No hay productos en el carrito';
+    }
+}
+function decreaseQuantity(productName) {
+    // Find the product in the cart
+    const product = carrito.find(item => item.nombre === productName);
+
+    if (product) {
+        if (product.quantity > 1) {
+            // If the product quantity is more than 1, decrease it
+            product.quantity--;
+        } else {
+            // If the product quantity is 1, remove the product from the cart
+            carrito = carrito.filter(item => item.nombre !== productName);
+        }
+
+        // Re-render the cart
+        renderizarCarrito();
+    }
+}
 
 
 
@@ -282,7 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-let cart = [];
+
 
 // async function addToCart(productId) {
 //     // Fetch product data from the server
@@ -307,29 +324,29 @@ let cart = [];
 //     // Return the cart
 //     return cart;
 // }
-async function removeFromCart(productId) {
-    // Find the product in the cart
-    const productIndex = cart.findIndex(product => product.id === productId);
+// async function removeFromCart(productId) {
+//     // Find the product in the cart
+//     const productIndex = cart.findIndex(product => product.id === productId);
 
-    // If the product was found, remove it
-    if (productIndex !== -1) {
-        cart.splice(productIndex, 1);
-    }
-}
+//     // If the product was found, remove it
+//     if (productIndex !== -1) {
+//         cart.splice(productIndex, 1);
+//     }
+// }
 
-async function checkout() {
-    // Send the cart data to the server
-    const response = await fetch('/checkout', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(cart),
-    });
+// async function checkout() {
+//     // Send the cart data to the server
+//     const response = await fetch('/checkout', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify(cart),
+//     });
 
-    // Clear the cart
-    cart = [];
+//     // Clear the cart
+//     cart = [];
 
-    // Return the server's response
-    return await response.json();
-}
+//     // Return the server's response
+//     return await response.json();
+// }

@@ -230,3 +230,22 @@ footer {
     display: none;
 }
 
+.flex-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; 
+}
+
+.flex-item {
+    display: flex;
+    /* align-items: center; // Optional: This will vertically align the items if they have different heights */
+}
+
+.align-left {
+    float: left;
+}
+
+.margin-right {
+     margin-right: 20px; /*// Adjust this value to add more or less space */
+}

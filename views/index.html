@@ -16,6 +16,7 @@
 </head>
 
 <body>
+   
     <div id="father">
         <h1 class="titulo">SORTILEGIOS PELIRROJOS
             <input placeholder="Filtrar" id= "buscador" action = "selectproductos">
@@ -41,7 +42,7 @@
                 
                
 
-                <p class="text-right">Total: <span id="total"></span>&euro;</p>
+                
                 <button id="boton-vaciar" class="btn btn-danger">Vaciar</button>
             </div>
         </div>
@@ -77,7 +78,7 @@
             </div>
 
             <div class="boton"> <!--boton que lleva a la pagina de nuevo elemento-->
-                <button type="button" class="nuevo" onclick='loadMore()'>Cargar mas</button>
+                <button type="button" id="loadMore" class="nuevo" onclick='loadMore()'>Cargar mas</button>
             </div>
             <div class="boton"> <!--boton que lleva a la pagina de nuevo elemento-->
                 <a href="nuevoelemento"><button type="button" class="nuevo">Nuevo Producto</button></a>

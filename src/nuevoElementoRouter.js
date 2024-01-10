@@ -6,6 +6,43 @@ import { getAllElements } from './productoService.js';
 
 const router = express.Router();
 
+
+let cart = [];
+
+
+router.get('/get-cart', (_, res) => {
+
+    
+
+    // Send the cart as a JSON response
+    
+    console.log(cart);
+    res.json(cart);
+});
+
+router.post('/add-to-cart/:id', (req, res) => {
+    // Get the product ID from the request parameters
+    const productId = req.params.id;
+
+    // Find the product in your data storage
+    // This is just an example, you would need to replace this with your actual code to find the product
+    const product = productoService.getElementByID(productId);
+
+    const existingProduct = cart.find(item => item.id === product.id);
+
+    if (existingProduct) {
+        // If the product is already in the cart, increase its quantity
+        existingProduct.quantity++;
+    } else {
+        // If the product is not in the cart, add it
+        product.quantity = 1;
+        cart.push(product);
+    }
+
+    // Send the cart as a JSON response
+    res.json(cart);
+});
+
 router.get('/', (req, res) => {
     const elements = productoService.getAllElements(0,4);
     res.render('index', {elements: elements});
@@ -22,9 +59,6 @@ router.get('/elementos', (req, res) => {
 
 router.use(express.static('public')); // Cargar CSS
 
-router.get('/', (req, res) => {
-    res.render('index', {elements: productoService.getAllElements()});
-});
 
 router.get('/nuevoElemento', (req, res) => {
     res.render('nuevoElemento');
@@ -109,7 +143,7 @@ const elementData = { // <= NUEVO Objeto
 
 // => CAMBIOS: Página_Detalle_grupoC por pagina_detalle_grupoc
 router.post('/pagina_detalle_grupoc/:id/delete', (req, res) => {
-    const borrado = productoService.deleteElementById(req.params.id);
+    const borrado = productoService.deleteElementByID(req.params.id);
 
     if (borrado) {
         res.redirect('/');
