@@ -17,7 +17,7 @@ router.get('/get-cart', (_, res) => {
 
     // Send the cart as a JSON response
     
-    console.log(cart);
+    // console.log(cart);
     res.json(cart);
 });
 
@@ -48,24 +48,24 @@ router.post('/add-to-cart/:id', (req, res) => {
 router.post('/decrease-quantity/:nombre', (req, res) => {
     // Get the product name from the request parameters
     const productName = req.params.nombre;
-    console.log(productName);
+    // console.log(productName);
 
     // Find the product in your data storage
     const product = productoService.getElementByNombre(productName);
-    console.log(product);
+    // console.log(product);
 
     // Find the product in the cart
     
     
 
     if (product.quantity >= 1) {
-        console.log('found');
+        // console.log('found');
         // If the product is already in the cart, decrease its quantity
         product.quantity--;
         if (product.quantity === 0) {
             // If the quantity is 0, remove the product from the cart
             cart = cart.filter(cartItem => cartItem.nombre !== product.nombre);
-            console.log(cart);
+            // console.log(cart);
         }
     }
 

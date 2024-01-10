@@ -10,13 +10,12 @@ const NUM_RESULTS = 4;
 let loadMoreRequests = 0;
 
 
-
 async function loadMore() {
     const from = (loadMoreRequests + 1) * NUM_RESULTS;
     const to = from + NUM_RESULTS;
     const response = await fetch(`/elementos?from=${from}&to=${to}`);
     const newelementos = await response.text();
-    console.log(newelementos);
+    // console.log(newelementos);
     const elementosDiv = document.getElementById("elementos");
     elementosDiv.innerHTML += newelementos;
     loadMoreRequests++;
@@ -51,12 +50,12 @@ document.addEventListener('click', function (event) {
     const cartButton = document.getElementById('cart-button');
     const loadMoreButton = document.getElementById('loadMore');
     const addButton = document.querySelectorAll('.add-to-cart-button'); // NodeLIst, debemos pasar a Array
-    console.log(addButton);
+    // console.log(addButton);
     const isAddButton = Array.from(addButton).some(button => button.contains(event.target));
 
     //Array = pasar a array desde addButton
     //some = alguno de los elementos del array cumple la condición
-    console.log(isAddButton);
+    // console.log(isAddButton);
     // Verificar si se hizo clic fuera del contenedor del carrito y del botón del carrito
     if (!isAddButton && !cartContainer.contains(event.target) && event.target !== cartButton && event.target !== loadMoreButton) {
         // 
@@ -71,7 +70,7 @@ let carrito = [];
 async function loadCart() {
     const response = await fetch('/get-cart', { method: 'GET' });
     carrito = await response.json();
-    console.log(carrito.length);
+    // console.log(carrito.length);
 
     // Log the cart items
     for (let oldProduct of carrito) {
@@ -83,13 +82,13 @@ async function loadCart() {
             quantity: oldProduct.quantity  // Assuming quantity is also part of your data
         };
 
-        console.log(renamedProduct);
+        // console.log(renamedProduct);
 
 
 
         carrito[carrito.indexOf(oldProduct)] = renamedProduct;
 
-        console.log(renamedProduct);
+        // console.log(renamedProduct);
 
     }
 
@@ -113,15 +112,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Check if the clicked element is the one you're interested in
         if (evento.target.classList.contains('add-to-cart-button')) {
             // Handle the event
-            console.log('A child element was clicked!');
+
             const productId = (evento.target.getAttribute('data-id'));
-            console.log(productId);
+
             fetch(`/add-to-cart/${productId}`, {
                 method: 'POST'
             })
                 .then(response => response.json()) // Convert the response data to JSON
                 .then(cart => {
-                    console.log(cart.length);
+
 
                     const product = cart[cart.length - 1];
 
@@ -132,9 +131,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         image1: product.newImagen1
                     };
 
-                    console.log(product.newNombre);
-                    console.log(product.newPrecio);
-                    console.log(product.newImagen1);
+
 
                     // Check if the product is already in the cart
                     const existingProduct = carrito.find(item => item.nombre === Product.nombre);
@@ -147,10 +144,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                         // If the product is not in the cart, add it
                         Product.quantity = 1;
                         carrito.push(Product);
-                        console.log('added')// Add the product to the cart
+
                     }
 
-                    console.log(carrito);
                     renderizarCarrito();
                 });
 
@@ -172,7 +168,6 @@ function renderizarCarrito() {
     cartItemsContainer.classList.add('flex-container');
     // Clear the cart items container
     cartItemsContainer.innerHTML = '';
-    console.log(carrito.length);
 
 
     // Check if there are items in the cart
@@ -183,7 +178,6 @@ function renderizarCarrito() {
         // Loop through the items in the cart
         for (let i = 0; i < carrito.length; i++) {
 
-            console.log(carrito[i].quantity);
             const existingProduct = carrito.find(item => item.nombre === carrito[i].nombre);
 
             if (existingProduct && existingProduct !== carrito[i]) {
@@ -256,7 +250,6 @@ async function decreaseQuantity(productName) {
     const response = await fetch(`/decrease-quantity/${productName}`, { method: 'POST' });
     if (response.ok) {
         // If the request was successful, reload the cart
-        console.log('ok');
         loadCart();
     }
 
