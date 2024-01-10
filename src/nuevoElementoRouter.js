@@ -12,8 +12,8 @@ let cart = [];
 
 
 router.get('/get-cart', (_, res) => {
-
-    
+    const allElements =  getAllElements();
+    cart = cart.filter(item => allElements.some(element => element.id === item.id));
 
     // Send the cart as a JSON response
     
@@ -41,6 +41,41 @@ router.post('/add-to-cart/:id', (req, res) => {
     }
 
     // Send the cart as a JSON response
+    res.json(cart);
+});
+
+
+router.post('/decrease-quantity/:nombre', (req, res) => {
+    // Get the product name from the request parameters
+    const productName = req.params.nombre;
+    console.log(productName);
+
+    // Find the product in your data storage
+    const product = productoService.getElementByNombre(productName);
+    console.log(product);
+
+    // Find the product in the cart
+    
+    
+
+    if (product.quantity >= 1) {
+        console.log('found');
+        // If the product is already in the cart, decrease its quantity
+        product.quantity--;
+        if (product.quantity === 0) {
+            // If the quantity is 0, remove the product from the cart
+            cart = cart.filter(cartItem => cartItem.nombre !== product.nombre);
+            console.log(cart);
+        }
+    }
+
+    // Send the cart as a JSON response
+    res.json(cart);
+});
+
+
+router.post('/remove', (req, res) => {
+    cart = [];
     res.json(cart);
 });
 

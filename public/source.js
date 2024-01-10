@@ -1,6 +1,6 @@
 
 
-    
+
 
 
 
@@ -58,7 +58,7 @@ document.addEventListener('click', function (event) {
     //some = alguno de los elementos del array cumple la condición
     console.log(isAddButton);
     // Verificar si se hizo clic fuera del contenedor del carrito y del botón del carrito
-    if (!isAddButton  &&  !cartContainer.contains(event.target) && event.target !== cartButton && event.target !== loadMoreButton ) {
+    if (!isAddButton && !cartContainer.contains(event.target) && event.target !== cartButton && event.target !== loadMoreButton) {
         // 
         cartContainer.classList.add('hidden');
     }
@@ -67,53 +67,43 @@ document.addEventListener('click', function (event) {
 
 
 
-// document.getElementById('add-to-cart-button').addEventListener('click', function () {
-//     console.log('a');
-//     const productId = this.dataset.id;
-
-//     fetch(`/add-to-cart/${productId}`, {
-//         method: 'POST'
-//     })
-//         .then(response => response.json()) // Convert the response data to JSON
-//         .then(cart => {
-//             // Do something with the cart...
-//         });
-// });
-
 let carrito = [];
-document.addEventListener('DOMContentLoaded', async () => {
-    
-   
-    async function loadCart() {
-        const response = await fetch('/get-cart', { method: 'GET' });
-        carrito = await response.json();
-        console.log(carrito.length);
-    
-        // Log the cart items
-        for (let oldProduct of carrito) {
+async function loadCart() {
+    const response = await fetch('/get-cart', { method: 'GET' });
+    carrito = await response.json();
+    console.log(carrito.length);
 
-            const renamedProduct = {
-                nombre: oldProduct.newNombre,
-                precio: oldProduct.newPrecio,
-                image1: oldProduct.newImagen1,
-                quantity: oldProduct.quantity  // Assuming quantity is also part of your data
-            };
+    // Log the cart items
+    for (let oldProduct of carrito) {
 
-            
+        const renamedProduct = {
+            nombre: oldProduct.newNombre,
+            precio: oldProduct.newPrecio,
+            image1: oldProduct.newImagen1,
+            quantity: oldProduct.quantity  // Assuming quantity is also part of your data
+        };
 
-            carrito[carrito.indexOf(oldProduct)] = renamedProduct;
+        console.log(renamedProduct);
 
-            console.log(renamedProduct);
 
-        }
-    
-        // Render the cart
-        renderizarCarrito();
+
+        carrito[carrito.indexOf(oldProduct)] = renamedProduct;
+
+        console.log(renamedProduct);
+
     }
 
+    // Render the cart
+    renderizarCarrito();
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+
+
+
     window.onload = loadCart;
-    
-    
+
+
 
     const miNodo = document.getElementById('father');
 
@@ -132,7 +122,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 .then(response => response.json()) // Convert the response data to JSON
                 .then(cart => {
                     console.log(cart.length);
-                    
+
                     const product = cart[cart.length - 1];
 
                     // Create a new product object with the data from the response
@@ -170,20 +160,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
-    const botonVaciar = document.querySelector('#boton-vaciar');
-
-    // Add a click event listener to the button
-    botonVaciar.addEventListener('click', () => {
-        // Empty the cart
-        carrito = [];
-
-        // Optionally, you can also update the cart display after emptying the cart
-        renderizarCarrito();
-    });
 
 
-    
-    
+
+
 }
 );
 function renderizarCarrito() {
@@ -194,7 +174,7 @@ function renderizarCarrito() {
     cartItemsContainer.innerHTML = '';
     console.log(carrito.length);
 
-    
+
     // Check if there are items in the cart
     if (carrito.length > 0) {
 
@@ -205,19 +185,19 @@ function renderizarCarrito() {
 
             console.log(carrito[i].quantity);
             const existingProduct = carrito.find(item => item.nombre === carrito[i].nombre);
-            
+
             if (existingProduct && existingProduct !== carrito[i]) {
                 // If the product is already in the cart, increase its quantity
                 existingProduct.quantity++;
                 continue;
             }
-            
+
             // Create a new div element for the product
             const productDiv = document.createElement('div');
             productDiv.classList.add('product', 'flex-item');
 
 
-        
+
 
             // Create and append the product image
             const productImage = document.createElement('img');
@@ -251,13 +231,13 @@ function renderizarCarrito() {
             productDiv.appendChild(productPrice);
 
             const productElement = document.createElement('div');
-        productElement.innerHTML = `
+            productElement.innerHTML = `
             <button onclick="decreaseQuantity('${carrito[i].nombre}')">-</button>
         `;
-        productDiv.appendChild(productElement);
+            productDiv.appendChild(productElement);
 
 
-            
+
 
             // Append the product div to the cart items container
             cartItemsContainer.appendChild(productDiv);
@@ -271,82 +251,39 @@ function renderizarCarrito() {
         cartItemsContainer.textContent = 'No hay productos en el carrito';
     }
 }
-function decreaseQuantity(productName) {
-    // Find the product in the cart
-    const product = carrito.find(item => item.nombre === productName);
+async function decreaseQuantity(productName) {
 
-    if (product) {
-        if (product.quantity > 1) {
-            // If the product quantity is more than 1, decrease it
-            product.quantity--;
-        } else {
-            // If the product quantity is 1, remove the product from the cart
-            carrito = carrito.filter(item => item.nombre !== productName);
-        }
+    const response = await fetch(`/decrease-quantity/${productName}`, { method: 'POST' });
+    if (response.ok) {
+        // If the request was successful, reload the cart
+        console.log('ok');
+        loadCart();
+    }
 
-        // Re-render the cart
-        renderizarCarrito();
+    // Re-render the cart
+    renderizarCarrito();
+}
+
+
+async function vaciarCarrito() {
+    const response = await fetch('/remove', { method: 'POST' });
+    if (response.ok) {
+        // If the request was successful, reload the cart
+        loadCart();
     }
 }
 
 
 
+const botonVaciar = document.querySelector('#boton-vaciar');
+
+// Add a click event listener to the button
+botonVaciar.addEventListener('click', () => {
+    // Empty the cart
+    vaciarCarrito();
+
+    // Optionally, you can also update the cart display after emptying the cart
+    renderizarCarrito();
+});
 
 
-
-
-
-
-
-
-
-
-// async function addToCart(productId) {
-//     // Fetch product data from the server
-//     const response = await fetch(`/pagina_detalle_grupoc/${productId}`);
-//     console.log(response);
-//     const productData = await response.text();
-//     console.log(productData);
-
-
-//     // Create a new product object with the data from the response
-//     const product = {
-//         nombre: document.getElementById('nombre'),
-//         precio: productData.newPrecio,
-//         // Add other properties as needed...
-//     };
-//     console.log(product);
-
-
-//     // Add the product to the cart
-//     cart.push(product);
-
-//     // Return the cart
-//     return cart;
-// }
-// async function removeFromCart(productId) {
-//     // Find the product in the cart
-//     const productIndex = cart.findIndex(product => product.id === productId);
-
-//     // If the product was found, remove it
-//     if (productIndex !== -1) {
-//         cart.splice(productIndex, 1);
-//     }
-// }
-
-// async function checkout() {
-//     // Send the cart data to the server
-//     const response = await fetch('/checkout', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify(cart),
-//     });
-
-//     // Clear the cart
-//     cart = [];
-
-//     // Return the server's response
-//     return await response.json();
-// }
