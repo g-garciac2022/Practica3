@@ -7,13 +7,22 @@ import * as elementos from './productoService.js';
 
 const router = express.Router();
 
+router.get('/selectproductos',(req,res) => {
+    let terminoBusqueda = req.query.termino || '';
+    console.log(terminoBusqueda);
+
+    res.render('elementos',{elemento:elementos.buscar(terminoBusqueda)})
+});
+
+
 
 let cart = [];
 
 
 router.get('/get-cart', (_, res) => {
-    const allElements =  getAllElements();
-    cart = cart.filter(item => allElements.some(element => element.id === item.id));
+    const allElements =  getAllElements(); //Si se borra no aparece en el carrrito
+    cart = cart.filter(item => allElements.some(element => element.id === item.id)); // <= Filtramos los elementos del carrito que existan en la base de datos
+    //   
 
     // Send the cart as a JSON response
     
@@ -39,7 +48,7 @@ router.post('/add-to-cart/:id', (req, res) => {
         product.quantity = 1;
         cart.push(product);
     }
-
+    // console.log(cart);
     // Send the cart as a JSON response
     res.json(cart);
 });
@@ -64,7 +73,9 @@ router.post('/decrease-quantity/:nombre', (req, res) => {
         product.quantity--;
         if (product.quantity === 0) {
             // If the quantity is 0, remove the product from the cart
-            cart = cart.filter(cartItem => cartItem.nombre !== product.nombre);
+            
+            cart = cart.filter(cartItem => cartItem.newNombre !== product.newNombre);
+            
             // console.log(cart);
         }
     }
@@ -100,12 +111,7 @@ router.get('/nuevoElemento', (req, res) => {
     res.render('nuevoElemento');
 });
 
-router.get('/selectproductos',(req,res) => {
-    let terminoBusqueda = req.query.termino || '';
-    console.log(terminoBusqueda);
 
-    res.render('elementos',{elemento:elementos.buscar(terminoBusqueda)})
-});
 
 
 router.get('/:id', (req, res) => {

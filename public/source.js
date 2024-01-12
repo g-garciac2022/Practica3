@@ -30,7 +30,7 @@ async function buscarProductos(event) {
     const response = await fetch(`/selectproductos?termino=${encodeURIComponent(terminoBusqueda)}`);
 
     const elementos = await response.text();
-
+    console.log(elementos);
     const content = document.getElementById("elementos");
 
     content.innerHTML = elementos;
@@ -79,7 +79,7 @@ async function loadCart() {
             nombre: oldProduct.newNombre,
             precio: oldProduct.newPrecio,
             image1: oldProduct.newImagen1,
-            quantity: oldProduct.quantity  // Assuming quantity is also part of your data
+            quantity: oldProduct.quantity  
         };
 
         // console.log(renamedProduct);
@@ -122,13 +122,14 @@ document.addEventListener('DOMContentLoaded', async () => {
                 .then(cart => {
 
 
-                    const product = cart[cart.length - 1];
+                    const product = cart[cart.length - 1]; // Get the last item in the cart array
 
                     // Create a new product object with the data from the response
                     const Product = {
                         nombre: product.newNombre,
                         precio: product.newPrecio,
                         image1: product.newImagen1
+                        //Podemos llevarnos quantity
                     };
 
 
@@ -245,6 +246,8 @@ function renderizarCarrito() {
         cartItemsContainer.textContent = 'No hay productos en el carrito';
     }
 }
+
+
 async function decreaseQuantity(productName) {
 
     const response = await fetch(`/decrease-quantity/${productName}`, { method: 'POST' });
@@ -253,8 +256,7 @@ async function decreaseQuantity(productName) {
         loadCart();
     }
 
-    // Re-render the cart
-    renderizarCarrito();
+   
 }
 
 
@@ -275,8 +277,7 @@ botonVaciar.addEventListener('click', () => {
     // Empty the cart
     vaciarCarrito();
 
-    // Optionally, you can also update the cart display after emptying the cart
-    renderizarCarrito();
+    
 });
 
 
