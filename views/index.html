@@ -20,7 +20,7 @@
     <div id="father">
         <h1 class="titulo">SORTILEGIOS PELIRROJOS
             <form class="d-flex" role="search" onsubmit="buscarProductos(event)">
-                <input class="form-control" id="buscador" type="search" placeholder="¿Que tienes en mente...?" aria-label="Search">
+                <input class="form-control" id="buscador" type="search" placeholder="Buscar" aria-label="Search">
             <!----    <button class="btn btn-outline-success" type="submit" >Search</button> -->
             </form>
     </h1>
@@ -53,31 +53,28 @@
         <div class="container text-center">
             <!--contenedor de todos los elementos, dividido en 12 (luego se dividen en filas y columnas)-->
 
-            <div class="row"> <!--Fila 1-->
-                <div id="elementos">
-                    {{#elements}}
-                    <div class="col-12 col-sm-6 col-lg-3">
-                        <!--Columna 1 (Fila 1) ocupa 6 espacios del contenedor en tamaño de tablet, 3 espacios para ordenaor o portatil, y todos los espacios en el resto de casos-->
-                        <div class="producto">
-                            <!--clase producto para que todos los elementos tengan el mismo estilo en css-->
-                            <img src={{newImagen1}} alt="{{newNombre}}">
-                            <!--en el contenedor de producto añadimos la imagen del producto-->
-                            <p class="precio">{{newPrecio}}$</p>
-                            <!--debajo de la imagen aparece un parrafo con el precio del producto-->
-                            <div class="overlay">
-                                <!--la clase overlay hara en css que se desvanezca casi del todo la imagen del producto, y que aparezaca el nombre del producto encima-->
-
-                                <!-- => CAMBIOS: Página_Detalle_grupoC por pagina_detalle_grupoc, se le quita el .html y se le añade el ID -->
-                                <a href="pagina_detalle_grupoc/{{id}}">
-                                    <p>{{newNombre}}</p>
-                                </a>
-                                <!--El nombre del producto es lo que nos lleva a la pagina de detalle, y todos los productos llevaran al mismo producto-->
-                                <button id="add-to-cart-button" class="add-to-cart-button" data-id="{{id}}" >Añadir al carrito</button> <!--onclick="addToCart(this.getAttribute('data-id'))"-->
-                            </div>
+            <div class="row" id="elementos"> <!--Fila 1-->
+                {{#elements}}
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <!--Columna 1 (Fila 1) ocupa 6 espacios del contenedor en tamaño de tablet, 3 espacios para ordenaor o portatil, y todos los espacios en el resto de casos-->
+                    <div class="producto">
+                        <!--clase producto para que todos los elementos tengan el mismo estilo en css-->
+                        <img src={{newImagen1}} alt="{{newNombre}}">
+                        <!--en el contenedor de producto añadimos la imagen del producto-->
+                        <p class="precio">{{newPrecio}}$</p>
+                        <!--debajo de la imagen aparece un parrafo con el precio del producto-->
+                        <div class="overlay">
+                            <!--la clase overlay hara en css que se desvanezca casi del todo la imagen del producto, y que aparezaca el nombre del producto encima-->
+                             <!-- => CAMBIOS: Página_Detalle_grupoC por pagina_detalle_grupoc, se le quita el .html y se le añade el ID -->
+                            <a href="pagina_detalle_grupoc/{{id}}">
+                                <p>{{newNombre}}</p>
+                            </a>
+                            <!--El nombre del producto es lo que nos lleva a la pagina de detalle, y todos los productos llevaran al mismo producto-->
+                            <button id="add-to-cart-button" class="add-to-cart-button" data-id="{{id}}" >Añadir al carrito</button> <!--onclick="addToCart(this.getAttribute('data-id'))"-->
                         </div>
                     </div>
-                    {{/elements}}
                 </div>
+                {{/elements}}
             </div>
 
             <div class="boton"> <!--boton que lleva a la pagina de nuevo elemento-->

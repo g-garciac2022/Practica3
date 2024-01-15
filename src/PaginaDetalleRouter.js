@@ -1,6 +1,6 @@
 import express from 'express';
 import * as productoService from './productoService.js';
-import {mostrarMagos} from "./productoService.js";
+import {buscar} from './productoService.js';
 import { getAllElements } from './productoService.js';
 import * as elementos from './productoService.js';
 
@@ -49,13 +49,6 @@ router.get('/elementos', (req, res) => {
     const elements = getAllElements(from,to);
 
     res.render('elementos', {elements: elements});
-});
-
-router.get('/selectproductos',(req,res) => {
-    let terminoBusqueda = req.query.termino || '';
-    console.log(terminoBusqueda);
-
-    res.render('elementos',{elemento:elementos.buscar(terminoBusqueda)})
 });
 
 

@@ -9,11 +9,12 @@
 
 .titulo input {         /*Ajustar tamaño del formulario*/
     text-align: center;
-    align-items: right;
-    font-size: x-large;
+    font-size: medium;
     font-family: 'Times New Roman', Times, serif;
-    margin-left: 500px;
+    margin-left: 1500px;
+    margin-right: 150px;
     border-radius: 5cm;
+    border-color: black;
 }
 
 body {

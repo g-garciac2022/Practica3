@@ -51,11 +51,9 @@ const elements = [];
 export function buscar(terminoBusqueda) {
 
     let elementos = [];
-    console.log("terminoBusqueda");
 
     elementos = elements.filter((elem) => elem.newNombre.toLowerCase().includes(terminoBusqueda.toLowerCase()));
     
-    console.log(elementos);
 
     return elementos;
 }
@@ -91,9 +89,6 @@ export function getElementByID(elementId){
     
     return element;
 }
-const NUM_RESULTS = 4;
-
-let loadMoreRequests = 0;
 
 export function getAllElements(from,to) {
     // const from = (loadMoreRequests) * NUM_RESULTS;
@@ -188,7 +183,7 @@ export function deleteElementByID(elementId) {
 
 export function loadSampleData() {
 
-    newElement({ id: 1, newNombre: 'Rana de Chocolate', newDescripcion: 'Este producto es muy divertido... pero cierra puertas y ventanas que es más escurridizo de lo que parece. Además viene con un divertido cromo de un mago/bruja.¡Hay más de 100, colecciónalos!', newPrecio: '14.50', newEfectosSecundarios: 'En el caso de estar caducado no consumir de ninguna manera. Al menos si quieres seguir siendo humano y no ir a clase dando saltos... Producto peligroso, al consumir en mal estado puede producir transformación progresiva en rana.', newImagen1: 'https://www.curiosite.es/img/auto_catalogo/w618/31321.jpg', newImagen2: 'https://storage.googleapis.com/catalog-pictures-carrefour-es/catalog/pictures/hd_510x_/0849421004651_1.jpg', newImagen3: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQfgfG9YxrWUHMZH8yXAsTA3eLxx7D8Y5nkQ&usqp=CAU', Leche: true, Cacao: true, Avellanas: true, magos: magos, });
+    newElement({ id:1, newNombre: 'Rana de Chocolate', newDescripcion: 'Este producto es muy divertido... pero cierra puertas y ventanas que es más escurridizo de lo que parece. Además viene con un divertido cromo de un mago/bruja.¡Hay más de 100, colecciónalos!', newPrecio: '14.50', newEfectosSecundarios: 'En el caso de estar caducado no consumir de ninguna manera. Al menos si quieres seguir siendo humano y no ir a clase dando saltos... Producto peligroso, al consumir en mal estado puede producir transformación progresiva en rana.', newImagen1: 'https://www.curiosite.es/img/auto_catalogo/w618/31321.jpg', newImagen2: 'https://storage.googleapis.com/catalog-pictures-carrefour-es/catalog/pictures/hd_510x_/0849421004651_1.jpg', newImagen3: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQfgfG9YxrWUHMZH8yXAsTA3eLxx7D8Y5nkQ&usqp=CAU', Leche: true, Cacao: true, Avellanas: true, magos: magos, });
     newElement({ id:2, newNombre: 'Poción Omitir Carrera', newDescripcion: 'Con esta poción obtienes tu título correspondiente a la carrera que estés cursando, independientemente de los años que te queden por cursar. Sin embargo, aprende bien los conceptos necesarios que sino no te sirve de nada cuando vayas a trabajar en algo...', newPrecio: '99.99', newEfectosSecundarios: 'En el caso de estar caducado puede producir desde amnesia leve hasta pérdida de la memoria.', newImagen1: 'https://img.freepik.com/fotos-premium/ia-generativa-pocion-magica-verde-botella-etiqueta-vacia_634053-4104.jpg', newImagen2: 'https://img.freepik.com/fotos-premium/ia-generativa-pocion-magica-liquido-color-verde-botella_501669-27205.jpg', newImagen3: 'https://img.freepik.com/fotos-premium/botella-vidrio-quimico-llena-pocion-sobre-fondo-oscuro-concepto-liquido-magico-ia-generativa_356060-4466.jpg?w=2000', Leche: true, Cacao: true, Avellanas: true, magos: magos, });
     newElement({ id:3, newNombre: 'A-Pruebame', newDescripcion: 'Ideal cuando no has estudiado. Alimento que le das a tu profesor, le dices tu nombre y mínimo un aprobado te sacas.', newPrecio: '24.50', newEfectosSecundarios: 'No consumir más de uno a la vez. Puede dar dolor de cabeza fuerte.', newImagen1: 'https://casadesante.com/cdn/shop/products/51XuAkoXarL.jpg?v=1684287766', newImagen2: 'https://www.lacasadelasgolosinas.com/3811-thickbox_default/bola-fresa-caramelo-masticable-ceconsa-200u.jpg', newImagen3: 'https://i.pinimg.com/originals/ef/98/0b/ef980b645c63a997bb102b35d8a2e554.jpg', Leche: true, Cacao: true, Avellanas: true, magos: magos,});
     newElement({ id:4, newNombre: 'Felix Felicis', newDescripcion: 'Poción muy poderosa. Te proporciona un golpe de suerte durante un periodo corto de tiempo. Ideal si todo te sale mal.', newPrecio: '333.33', newEfectosSecundarios: 'Tiene una probabilidad baja de producir el efecto contrario durante una semana', newImagen1: 'https://pbs.twimg.com/media/FH_JvIoXMAM4Qpa.jpg', newImagen2: 'https://pm1.aminoapps.com/6516/bf0157978db3a01d3af142b30cd8c29b10daff44_hq.jpg', newImagen3: 'https://pbs.twimg.com/media/EFk-hz3W4AApkhl.jpg', Leche: true, Cacao: true, Avellanas: true, magos: magos, });
