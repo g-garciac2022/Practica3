@@ -11,7 +11,7 @@ router.get('/selectproductos',(req,res) => {
     let terminoBusqueda = req.query.termino || '';
     console.log(terminoBusqueda);
 
-    res.render('elementos',{elemento:elementos.buscar(terminoBusqueda)})
+    res.render('elementos',{elements:elementos.buscar(terminoBusqueda)})
 });
 
 
@@ -109,10 +109,6 @@ router.use(express.static('public')); // Cargar CSS
 
 router.get('/nuevoElemento', (req, res) => {
     res.render('nuevoElemento');
-});
-
-
-    res.render('elementos',{elemento:elementos.buscar(terminoBusqueda)})
 });
 
 

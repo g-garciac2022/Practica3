@@ -25,14 +25,6 @@ router.get('/elementos', (req, res) => {
     res.render('elementos', { elements: elements });
 });
 
-router.get('/selectproductos',(req,res) => {
-    let terminoBusqueda = req.query.termino || '';
-    console.log(terminoBusqueda);
-
-    res.render('elementos',{elemento:elementos.buscar(terminoBusqueda)})
-});
-
-
 router.get('/', (req, res) => {
 
     res.render('index', {
