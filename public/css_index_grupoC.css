@@ -7,7 +7,8 @@
     font-size: 5em;
 }
 
-.titulo input {         /*Ajustar tamaño del formulario*/
+.titulo input {
+    /*Ajustar tamaño del formulario*/
     text-align: center;
     font-size: medium;
     font-family: 'Times New Roman', Times, serif;
@@ -18,11 +19,16 @@
 }
 
 body {
-    background-image: url('https://res.cloudinary.com/teepublic/image/private/s--5hHG_gX6--/t_Preview/b_rgb:5e366e,c_limit,f_jpg,h_630,q_90,w_630/v1483530754/production/designs/1028847_1.jpg'); /*Imagen de fondo*/
-    background-position: center center; /*Para dejar la imagen de fondo centrada, vertical y horizontalmente */
-    background-repeat: no-repeat; /*Evitar efecto mosaico en imagen*/
-    background-attachment: fixed; /*Para no deformar sus dimensiones*/
-    background-size: cover; /*Para cubrir toda la página*/
+    background-image: url('https://res.cloudinary.com/teepublic/image/private/s--5hHG_gX6--/t_Preview/b_rgb:5e366e,c_limit,f_jpg,h_630,q_90,w_630/v1483530754/production/designs/1028847_1.jpg');
+    /*Imagen de fondo*/
+    background-position: center center;
+    /*Para dejar la imagen de fondo centrada, vertical y horizontalmente */
+    background-repeat: no-repeat;
+    /*Evitar efecto mosaico en imagen*/
+    background-attachment: fixed;
+    /*Para no deformar sus dimensiones*/
+    background-size: cover;
+    /*Para cubrir toda la página*/
 }
 
 footer {
@@ -38,45 +44,60 @@ footer {
 
 /*Imagenes*/
 .row img {
-    background-size: cover; /*Las imagenes ocuparan todo el espacio dentro de lo que estén*/
+    background-size: cover;
+    /*Las imagenes ocuparan todo el espacio dentro de lo que estén*/
     max-width: 100%;
     height: auto;
     border-radius: 5px;
     display: block;
-    transition: all 0.2s ease; /*Tarda 0.2 segundos en desvanecerse casi al máximo la imagen*/
+    transition: all 0.2s ease;
+    /*Tarda 0.2 segundos en desvanecerse casi al máximo la imagen*/
 }
 
 
 /*Todo lo que esta dentro de la clase producto*/
 .producto a {
-    text-decoration: none; /*Quitar la decoracion de alineado por defecto de los link*/
+    text-decoration: none;
+    /*Quitar la decoracion de alineado por defecto de los link*/
     color: black;
 }
+
 .producto .precio {
     font-size: 20px;
     font-weight: bold;
     color: white;
     text-align: center;
 }
+
 .producto {
-    position: relative; /*Así los textos quedarán en el bloque de su producto correspondiente*/
+    position: relative;
+    /*Así los textos quedarán en el bloque de su producto correspondiente*/
 }
+
 .producto:hover img {
-    opacity: 0.2; /*Las imágenes serán casi del todo transparentes cuando se apunte sobre el producto que le corresponda*/
+    opacity: 0.2;
+    /*Las imágenes serán casi del todo transparentes cuando se apunte sobre el producto que le corresponda*/
 }
+
 .producto:hover .overlay {
-    opacity: 1; /*Cuando se apunte a un producto la opacidad de las letras (nombre del producto) será de 1*/
+    opacity: 1;
+    /*Cuando se apunte a un producto la opacidad de las letras (nombre del producto) será de 1*/
 }
 
 /*Desvanecer imagenes y aparecer texto*/
 .overlay {
-    transition: all 0.2s ease; /*transicion para aparecer lo que esta dentro de la clase overlay (los nombres de los productos)*/
-    opacity: 0; /*La opacidad es 0 a no ser que el puntero esté sobre el producto que le corresponde*/
-    position: absolute; /*El texto se coloca dentro de la clase producto*/
+    transition: all 0.2s ease;
+    /*transicion para aparecer lo que esta dentro de la clase overlay (los nombres de los productos)*/
+    opacity: 0;
+    /*La opacidad es 0 a no ser que el puntero esté sobre el producto que le corresponde*/
+    position: absolute;
+    /*El texto se coloca dentro de la clase producto*/
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /*El texto se coloca en el centro*/
+    transform: translate(-50%, -50%);
+    /*El texto se coloca en el centro*/
 }
+
 .overlay p {
     font-size: 25px;
     background-color: white;
@@ -87,21 +108,22 @@ footer {
 .boton {
     text-align: left;
 }
+
 .nuevo {
     background-color: greenyellow;
     border-color: darkgreen;
-    color:darkgreen;
+    color: darkgreen;
 }
 
 /*Carrito de la compra*/
 
-.icon-cart{
+.icon-cart {
     width: 40px;
     height: 40px;
     stroke: #000;
 }
 
-.icon-cart:hover{
+.icon-cart:hover {
     cursor: pointer;
 }
 
@@ -111,23 +133,29 @@ footer {
     bottom: 10px;
     right: 10px;
 }
+
 .carrito {
     display: flex;
     position: fixed;
-    bottom: 60px; /* Ajusta este valor según el tamaño de tu icono y el espacio que quieras entre el carrito y el icono */
+
+
+    z-index: 1000;
+    bottom: 60px;
+    /* Ajusta este valor según el tamaño de tu icono y el espacio que quieras entre el carrito y el icono */
     right: 10px;
-    margin-bottom: 10px; /* Añade un margen inferior para asegurarte de que el carrito no se superponga con el contenedor del icono */
+    margin-bottom: 10px;
+    /* Añade un margen inferior para asegurarte de que el carrito no se superponga con el contenedor del icono */
 }
 
-.container-cart-products{
-    
+.container-cart-products {
+
 
     background-color: #fff;
     width: 400px;
     z-index: 1;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.20);
     border-radius: 10px;
-    
+
 }
 
 .container-icon img {
@@ -136,7 +164,7 @@ footer {
 }
 
 
-.count-products{
+.count-products {
     position: absolute;
     top: 55%;
     right: 0;
@@ -152,13 +180,13 @@ footer {
     border-radius: 50%;
 }
 
-#contador-productos{
+#contador-productos {
     font-size: 12px;
 }
 
 
 
-.cart-product{
+.cart-product {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -168,38 +196,38 @@ footer {
 
 }
 
-.info-cart-product{
+.info-cart-product {
     display: flex;
     justify-content: space-between;
     flex: 0.8;
 }
 
-.titulo-producto-carrito{
+.titulo-producto-carrito {
     font-size: 20px;
 }
 
-.precio-producto-carrito{
+.precio-producto-carrito {
     font-weight: 700;
     font-size: 20px;
     margin-left: 10px;
 }
 
-.cantidad-producto-carrito{
+.cantidad-producto-carrito {
     font-weight: 400;
     font-size: 20px;
 }
 
-.icon-close{
+.icon-close {
     width: 25px;
     height: 25px;
 }
 
-.icon-close:hover{
+.icon-close:hover {
     stroke: red;
     cursor: pointer;
 }
 
-.cart-total{
+.cart-total {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -207,27 +235,27 @@ footer {
     gap: 20px;
 }
 
-.cart-total h3{
+.cart-total h3 {
     font-size: 20px;
     font-weight: 700;
 }
 
-.total-pagar{
+.total-pagar {
     font-size: 20px;
     font-weight: 900;
 }
 
-.hidden-cart{
+.hidden-cart {
     display: none;
 }
 
-.cart-empty{
+.cart-empty {
     padding: 20px;
     text-align: center;
 }
 
 
-.hidden{
+.hidden {
     display: none;
 }
 
@@ -235,7 +263,7 @@ footer {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100%; 
+    height: 100%;
 }
 
 .flex-item {
@@ -248,5 +276,7 @@ footer {
 }
 
 .margin-right {
-     margin-right: 20px; /*// Adjust this value to add more or less space */
+    margin-right: 20px;
+    /*// Adjust this value to add more or less space */
 }
+

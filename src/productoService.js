@@ -175,6 +175,14 @@ export function borrarProducto(elementId) {
     return false;
 }
 
+export function getElementByNombre(elementNombre) {
+    //Para obtener el nombre del elemento
+    const element = elements.find(element => element.newNombre === elementNombre);
+
+    return element;
+}
+
+
 
 export function deleteElementByID(elementId) {
     const index = elements.findIndex(element => element.id === Number(elementId))
