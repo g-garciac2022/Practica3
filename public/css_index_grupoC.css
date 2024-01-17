@@ -16,6 +16,8 @@
     margin-right: 150px;
     border-radius: 5cm;
     border-color: black;
+    width: 500px;
+    display: block;
 }
 
 body {
