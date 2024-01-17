@@ -22,6 +22,8 @@
     margin-bottom: 10px;
     border-radius: 5cm;
     border-color: black;
+    width: 500px;
+    display: block;
 }
 
 .form-control{
