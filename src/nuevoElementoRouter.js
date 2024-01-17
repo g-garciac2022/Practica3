@@ -8,8 +8,8 @@ import * as elementos from './productoService.js';
 const router = express.Router();
 
 router.get('/selectproductos',(req,res) => {
-    let terminoBusqueda = req.query.termino || '';
-    console.log(terminoBusqueda);
+    let terminoBusqueda = req.query.termino || ''; // <= Si no hay termino de búsqueda, ponemos un string vacío
+    // console.log(terminoBusqueda);
 
     res.render('elementos',{elements:elementos.buscar(terminoBusqueda)})
 });

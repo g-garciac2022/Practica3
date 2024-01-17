@@ -23,14 +23,14 @@ async function loadMore() {
 
 async function buscarProductos(event) {
 
-    event.preventDefault();
+    event.preventDefault(); //evita que se recargue la página
 
-    const terminoBusqueda = document.getElementById("buscador").value;
+    const terminoBusqueda = document.getElementById("buscador").value; //obtenemos el valor del input
 
-    const response = await fetch(`/selectproductos?termino=${encodeURIComponent(terminoBusqueda)}`);
+    const response = await fetch(`/selectproductos?termino=${encodeURIComponent(terminoBusqueda)}`); //encodeURIComponent para que no haya problemas con los espacios
 
     const elementos = await response.text();
-    console.log(elementos);
+    // console.log(elementos);
     const content = document.getElementById("elementos");
 
     content.innerHTML = elementos;
@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 
-    window.onload = loadCart;
+    window.onload = loadCart();
 
 
 
@@ -119,37 +119,38 @@ document.addEventListener('DOMContentLoaded', async () => {
                 method: 'POST'
             })
                 .then(response => response.json()) // Convert the response data to JSON
-                .then(cart => {
+
+                // .then(cart => {
+
+loadCart();
+                //     const product = cart[cart.length - 1]; // Get the last item in the cart array
+
+                //     // Create a new product object with the data from the response
+                //     const Product = {
+                //         nombre: product.newNombre,
+                //         precio: product.newPrecio,
+                //         image1: product.newImagen1
+                //         //Podemos llevarnos quantity
+                //     };
 
 
-                    const product = cart[cart.length - 1]; // Get the last item in the cart array
 
-                    // Create a new product object with the data from the response
-                    const Product = {
-                        nombre: product.newNombre,
-                        precio: product.newPrecio,
-                        image1: product.newImagen1
-                        //Podemos llevarnos quantity
-                    };
+                //     // Check if the product is already in the cart
+                //     const existingProduct = carrito.find(item => item.nombre === Product.nombre);
 
+                //     if (existingProduct) {
+                //         // If the product is already in the cart, increase its quantity
+                //         existingProduct.quantity++;
 
+                //     } else {
+                //         // If the product is not in the cart, add it
+                //         Product.quantity = 1;
+                //         carrito.push(Product);
 
-                    // Check if the product is already in the cart
-                    const existingProduct = carrito.find(item => item.nombre === Product.nombre);
+                //     }
 
-                    if (existingProduct) {
-                        // If the product is already in the cart, increase its quantity
-                        existingProduct.quantity++;
-
-                    } else {
-                        // If the product is not in the cart, add it
-                        Product.quantity = 1;
-                        carrito.push(Product);
-
-                    }
-
-                    renderizarCarrito();
-                });
+                //     renderizarCarrito();
+                // });
 
 
 
@@ -184,7 +185,7 @@ function renderizarCarrito() {
             if (existingProduct && existingProduct !== carrito[i]) {
                 // If the product is already in the cart, increase its quantity
                 existingProduct.quantity++;
-                continue;
+                continue; // Skip to the next iteration of the loop
             }
 
             // Create a new div element for the product
@@ -199,9 +200,8 @@ function renderizarCarrito() {
             productImage.src = carrito[i].image1;
             productImage.alt = carrito[i].nombre;
             productImage.classList.add('align-left');
-            productImage.width = 70; // Set the width of the image
-            productImage.height = 70; // Set the height of the image
-            // productImage.classList.add('your-class-name'); // Add a class to the image
+            productImage.width = 70; 
+            productImage.height = 70; 
             productDiv.appendChild(productImage);
 
             // Create and append the product quantity
@@ -237,12 +237,14 @@ function renderizarCarrito() {
             // Append the product div to the cart items container
             cartItemsContainer.appendChild(productDiv);
         }
-        const total = carrito.reduce((acc, item) => acc + item.precio * item.quantity, 0).toFixed(2);
+        const total = carrito.reduce((acc, item) => acc + item.precio * item.quantity, 0).toFixed(2); // Calculate the total price of the items in the cart to 2 decimal places
+        // ACC = acumulador, item = elemento del array
+
         const totalDiv = document.createElement('div');
         totalDiv.textContent = 'Total: ' + total + '€';
         cartItemsContainer.appendChild(totalDiv);
     } else {
-        // If there are no items in the cart, display a message
+      
         cartItemsContainer.textContent = 'No hay productos en el carrito';
     }
 }

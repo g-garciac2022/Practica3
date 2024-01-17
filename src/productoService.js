@@ -54,7 +54,7 @@ export function buscar(terminoBusqueda) {
 
     elementos = elements.filter((elem) => elem.newNombre.toLowerCase().includes(terminoBusqueda.toLowerCase()));
     
-    console.log(elementos);
+    // console.log(elementos);
 
     return elementos;
 }
