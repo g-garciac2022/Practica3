@@ -1,5 +1,7 @@
 .titulo {
     background-color: greenyellow;
+    display: flex;
+    flex-direction: column;
     color: orange;
     width: 100%;
     text-align: center;
@@ -7,15 +9,24 @@
     font-size: 5em;
 }
 
-.titulo input {
+.titulo-child {
     /*Ajustar tamaño del formulario*/
+    min-width: 35%;
+    display: flex;
+    justify-content: flex-start;
     text-align: center;
     font-size: medium;
     font-family: 'Times New Roman', Times, serif;
-    margin-left: 1500px;
-    margin-right: 150px;
+    margin-left: auto;
+    margin-right: 100px;
+    margin-bottom: 10px;
     border-radius: 5cm;
     border-color: black;
+}
+
+.form-control{
+    display: flex;
+    justify-content: flex-start;
 }
 
 body {
