@@ -1,4 +1,4 @@
-Nombre de la página: Sortilegios Pelirrojos \n
+Nombre de la página: Sortilegios Pelirrojos
 Miembros del grupo:
   Gonzalo García Castillo
   Alejandro Valor González
